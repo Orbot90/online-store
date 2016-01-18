@@ -7,6 +7,7 @@ public class GoodsDTO {
     private Double price;
     private Long count;
     private Category category;
+    private String producer;
 
     public String getName() {
         return name;
@@ -38,5 +39,13 @@ public class GoodsDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
     }
 }

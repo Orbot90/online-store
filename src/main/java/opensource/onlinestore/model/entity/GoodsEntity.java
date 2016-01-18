@@ -22,6 +22,8 @@ public class GoodsEntity {
     private Category category;
     @NotNull
     private Double price;
+    @NotNull
+    private String producer;
 
     public Long getId() {
         return id;
@@ -63,6 +65,14 @@ public class GoodsEntity {
         this.price = price;
     }
 
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,14 +81,17 @@ public class GoodsEntity {
         GoodsEntity that = (GoodsEntity) o;
 
         if (!getId().equals(that.getId())) return false;
-        return getName().equals(that.getName());
+        if (!getName().equals(that.getName())) return false;
+        if (getCategory() != that.getCategory()) return false;
+        return getProducer().equals(that.getProducer());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getName().hashCode();
+        int result = getName().hashCode();
+        result = 31 * result + getCategory().hashCode();
+        result = 31 * result + getProducer().hashCode();
         return result;
     }
 }
