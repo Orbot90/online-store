@@ -113,6 +113,9 @@
     </dependencies>
 
     <build>
+        <filters>
+            <filter>src/main/resources/persistence.properties</filter>
+        </filters>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -130,6 +133,15 @@
                     <configuration>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                         <warName>store</warName>
+                        <webResources>
+                            <resource>
+                                <filtering>true</filtering>
+                                <directory>src/main/webapp</directory>
+                                <includes>
+                                    <include>**/META-INF/context.xml</include>
+                                </includes>
+                            </resource>
+                        </webResources>
                     </configuration>
                 </plugin>
             </plugins>
