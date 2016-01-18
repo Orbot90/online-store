@@ -1,6 +1,6 @@
 package opensource.onlinestore.repository;
 
-import opensource.onlinestore.model.GoodsEntity;
+import opensource.onlinestore.model.entity.GoodsEntity;
 import org.springframework.data.repository.CrudRepository;
 
 /**

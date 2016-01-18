@@ -1,4 +1,6 @@
-package opensource.onlinestore.model;
+package opensource.onlinestore.model.entity;
+
+import opensource.onlinestore.model.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,8 @@ public class GoodsEntity {
     private Long count;
     @NotNull
     private Category category;
+    @NotNull
+    private Double price;
 
     public Long getId() {
         return id;
@@ -33,6 +37,30 @@ public class GoodsEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override
