@@ -20,11 +20,6 @@ public class GoodsEntity extends BaseEntity{
     @NotNull
     private String producer;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional=true)
-    @JoinTable(name = "CATALOG", joinColumns = @JoinColumn(name = "ID_BOOK"), inverseJoinColumns = @JoinColumn(name = "ID_STUDENT"))
-    private Order order;
-
-
     public String getName() {
         return name;
     }
