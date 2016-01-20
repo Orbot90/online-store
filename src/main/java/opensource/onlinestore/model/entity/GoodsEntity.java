@@ -2,18 +2,13 @@ package opensource.onlinestore.model.entity;
 
 import opensource.onlinestore.model.Category;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "GOODS")
-public class GoodsEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class GoodsEntity extends BaseEntity{
+
     @NotNull
     private String name;
     @NotNull
@@ -25,13 +20,10 @@ public class GoodsEntity {
     @NotNull
     private String producer;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY,optional=true)
+    @JoinTable(name = "CATALOG", joinColumns = @JoinColumn(name = "ID_BOOK"), inverseJoinColumns = @JoinColumn(name = "ID_STUDENT"))
+    private Order order;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -73,25 +65,4 @@ public class GoodsEntity {
         this.producer = producer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GoodsEntity)) return false;
-
-        GoodsEntity that = (GoodsEntity) o;
-
-        if (!getId().equals(that.getId())) return false;
-        if (!getName().equals(that.getName())) return false;
-        if (getCategory() != that.getCategory()) return false;
-        return getProducer().equals(that.getProducer());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getCategory().hashCode();
-        result = 31 * result + getProducer().hashCode();
-        return result;
-    }
 }
