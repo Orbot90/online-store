@@ -1,12 +1,9 @@
 package opensource.onlinestore.controllers;
 
-import opensource.onlinestore.model.Category;
 import opensource.onlinestore.model.dto.GoodsDTO;
 import opensource.onlinestore.model.dto.PaymentResponseDTO;
-import opensource.onlinestore.repository.GoodsRepository;
 import opensource.onlinestore.service.GoodsService;
 import opensource.onlinestore.service.PaymentService;
-import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +36,11 @@ public class StoreController {
         return goodsService.addGoods(goods);
     }
 
-    @RequestMapping(value = "/getgoods", method = RequestMethod.GET)
-    @ResponseBody
-    public List<GoodsDTO> getGoods(Category category) {
-        return goodsService.getGoods(category);
-    }
+//    @RequestMapping(value = "/getgoods", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<GoodsDTO> getGoods(Category category) {
+//        return goodsService.getGoods(category);
+//    }
 
     //todo: Secure with hasRole("USER") when security configured
     @RequestMapping(value = "/payment", method = RequestMethod.POST)

@@ -1,7 +1,7 @@
 package opensource.onlinestore.service.impl;
 
-import opensource.onlinestore.model.Category;
 import opensource.onlinestore.model.dto.GoodsDTO;
+import opensource.onlinestore.model.entity.CategoryEntity;
 import opensource.onlinestore.repository.GoodsRepository;
 import opensource.onlinestore.service.GoodsService;
 import org.dozer.Mapper;
@@ -30,7 +30,7 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
-    public List<GoodsDTO> getGoods(Category category) {
+    public List<GoodsDTO> getGoods(CategoryEntity category) {
         return null;
     }
 

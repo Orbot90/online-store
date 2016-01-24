@@ -1,37 +1,24 @@
 package opensource.onlinestore.model.entity;
 
-import opensource.onlinestore.model.Category;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "GOODS")
-public class GoodsEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class GoodsEntity extends BaseEntity {
     @NotNull
     private String name;
     @NotNull
     private Long count;
     @NotNull
-    private Category category;
+    @ManyToOne
+    private CategoryEntity category;
     @NotNull
     private Double price;
     @NotNull
     private String producer;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -49,11 +36,11 @@ public class GoodsEntity {
         this.count = count;
     }
 
-    public Category getCategory() {
+    public CategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryEntity category) {
         this.category = category;
     }
 
@@ -80,7 +67,6 @@ public class GoodsEntity {
 
         GoodsEntity that = (GoodsEntity) o;
 
-        if (!getId().equals(that.getId())) return false;
         if (!getName().equals(that.getName())) return false;
         if (getCategory() != that.getCategory()) return false;
         return getProducer().equals(that.getProducer());

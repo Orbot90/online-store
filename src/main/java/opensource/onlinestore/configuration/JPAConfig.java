@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -26,6 +27,8 @@ public class JPAConfig {
     private boolean generateDdl;
     @Value("${data.database}")
     private String database;
+    @Value("${data.hbm2ddl.auto}")
+    private String hbm2ddlAuto;
 
     @Bean
     public DataSource dataSource() {
@@ -49,6 +52,9 @@ public class JPAConfig {
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter());
         entityManagerFactory.setPackagesToScan("opensource.onlinestore.model");
+        Properties jpaProperties = new Properties();
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
+        entityManagerFactory.setJpaProperties(jpaProperties);
         return entityManagerFactory;
     }
 
