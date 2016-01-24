@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "basket")
 public class Basket extends BaseEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

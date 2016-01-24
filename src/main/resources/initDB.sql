@@ -53,3 +53,5 @@ CREATE TABLE basket
   cleared    BOOL DEFAULT FALSE
 
 );
+
+CREATE TABLE
