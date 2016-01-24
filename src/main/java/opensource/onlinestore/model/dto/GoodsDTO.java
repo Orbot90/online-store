@@ -1,13 +1,15 @@
 package opensource.onlinestore.model.dto;
 
 import opensource.onlinestore.model.Category;
+import opensource.onlinestore.model.entity.CategoryEntity;
 
 public class GoodsDTO {
     private String name;
     private Double price;
     private Long count;
-    private Category category;
+    private CategoryEntity category;
     private String producer;
+    private String charachteristics;
 
     public String getName() {
         return name;
@@ -25,11 +27,11 @@ public class GoodsDTO {
         this.count = count;
     }
 
-    public Category getCategory() {
+    public CategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryEntity category) {
         this.category = category;
     }
 
@@ -47,5 +49,13 @@ public class GoodsDTO {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public String getCharachteristics() {
+        return charachteristics;
+    }
+
+    public void setCharachteristics(String charachteristics) {
+        this.charachteristics = charachteristics;
     }
 }

@@ -1,12 +1,10 @@
 package opensource.onlinestore.configuration;
 
-import opensource.onlinestore.model.type.JsonPostgreSQLDialect;
-import org.hibernate.dialect.PostgreSQL9Dialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,7 +19,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "opensource.onlinestore.repository")
-public class JPAConfig {
+public class TestJpaConfig {
     @Value("${data.showsql}")
     private boolean showSql;
     @Value("${data.generateddl}")
@@ -30,12 +28,23 @@ public class JPAConfig {
     private String database;
     @Value("${hibernate.dialect}")
     private String dialect;
+    @Value("${data.jdbc.driver}")
+    private String driver;
+    @Value("${data.jdbc.url}")
+    private String url;
+    @Value("${data.username}")
+    private String username;
+    @Value("${data.password}")
+    private String password;
 
     @Bean
     public DataSource dataSource() {
-        JndiDataSourceLookup dataSource = new JndiDataSourceLookup();
-        dataSource.setResourceRef(true);
-        return dataSource.getDataSource("jdbc/Store");
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(driver);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        return dataSource;
     }
 
     @Bean
