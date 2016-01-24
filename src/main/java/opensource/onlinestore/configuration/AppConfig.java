@@ -1,4 +1,4 @@
-package opensource.onlinestore.configuration;
+ package opensource.onlinestore.configuration;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
