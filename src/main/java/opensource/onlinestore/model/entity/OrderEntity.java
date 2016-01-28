@@ -21,7 +21,10 @@ public class OrderEntity implements Serializable{
     @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy="order")
+    @ManyToMany(targetEntity = GoodsEntity.class, cascade = {CascadeType.ALL})
+    @JoinTable(name = "GOODS_ORDERS",
+            joinColumns = {@JoinColumn(name = "orders_id")},
+            inverseJoinColumns = {@JoinColumn(name = "goods_id")})
     private List<GoodsEntity> goods;
 
     @Column(name="DATE")
