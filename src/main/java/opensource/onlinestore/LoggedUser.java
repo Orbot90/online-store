@@ -1,23 +1,27 @@
 package opensource.onlinestore;
 
-import opensource.onlinestore.Utils.UserUtils;
-import opensource.onlinestore.model.dto.UserTo;
+import opensource.onlinestore.model.dto.UserDTO;
 import opensource.onlinestore.model.entity.ActivityStatus;
 import opensource.onlinestore.model.entity.UserEntity;
+import org.dozer.DozerBeanMapperSingletonWrapper;
+import org.dozer.Mapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import static java.util.Objects.requireNonNull;
 
 /**
  * Created by maks(avto12@i.ua) on 27.01.2016.
  */
 public class LoggedUser extends org.springframework.security.core.userdetails.User {
-    private UserTo userTo;
+    private UserDTO userDTO;
+
+    Mapper userMapper= DozerBeanMapperSingletonWrapper.getInstance();
 
     public LoggedUser(UserEntity user) {
         super(user.getUserName(), user.getPassword(),true, true, true,
                 (!user.getActivityStatus().equals(ActivityStatus.BANNED)), user.getRoles());
-        this.userTo = UserUtils.asTo(user);
+        this.userDTO = userMapper.map(user,UserDTO.class);
     }
 
     public static LoggedUser safeGet() {
@@ -35,20 +39,16 @@ public class LoggedUser extends org.springframework.security.core.userdetails.Us
         return user;
     }
 
-    public UserTo getUserTo() {
-        return userTo;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public static long id() {
-        return get().userTo.getId();
-    }
-
-    public void update(UserTo newTo) {
-        userTo = newTo;
+    public void update(UserDTO newTo) {
+        userDTO = newTo;
     }
 
     @Override
     public String toString() {
-        return userTo.toString();
+        return userDTO.toString();
     }
 }

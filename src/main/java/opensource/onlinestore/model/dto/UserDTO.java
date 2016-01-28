@@ -9,10 +9,8 @@ import java.io.Serializable;
 /**
  * Created by maks(avto12@i.ua) on 27.01.2016.
  */
-public class UserTo implements Serializable{
+public class UserDTO implements Serializable{
     static final long serialVersionUID = 1L;
-
-    protected long id;
 
     @NotEmpty
     protected String username;
@@ -30,11 +28,10 @@ public class UserTo implements Serializable{
     @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
     protected String password;
 
-    public UserTo() {
+    public UserDTO() {
     }
 
-    public UserTo(long id, String username, String firstName, String lastName, String email, String password) {
-        this.id = id;
+    public UserDTO(String username, String firstName, String lastName, String email, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,13 +39,6 @@ public class UserTo implements Serializable{
         this.password = password;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -93,12 +83,10 @@ public class UserTo implements Serializable{
     @Override
     public String toString() {
         return "UserTo{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package opensource.onlinestore.model.entity;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -21,7 +20,6 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "password", nullable = false)
     @NotEmpty
-    @Length(min = 5)
     protected String password;
 
     @NotEmpty
@@ -56,6 +54,7 @@ public class UserEntity extends BaseEntity {
 
 
     protected byte[] avatar;
+
 
     AccountEntity eAccount;
 
@@ -192,8 +191,47 @@ public class UserEntity extends BaseEntity {
         this.roles = EnumSet.copyOf(roles);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserEntity)) return false;
 
+        UserEntity that = (UserEntity) o;
 
+        if (!getUserName().equals(that.getUserName())) return false;
+        if (!getPassword().equals(that.getPassword())) return false;
+        if (!getFirtstName().equals(that.getFirtstName())) return false;
+        if (!getLastName().equals(that.getLastName())) return false;
+        if (getAddress() != null ? !getAddress().equals(that.getAddress()) : that.getAddress() != null) return false;
+        if (!getRegistered().equals(that.getRegistered())) return false;
+        if (!getEmail().equals(that.getEmail())) return false;
+        if (getOrders() != null ? !getOrders().equals(that.getOrders()) : that.getOrders() != null) return false;
+        if (getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null) return false;
+        if (!Arrays.equals(getAvatar(), that.getAvatar())) return false;
+        if (geteAccount() != null ? !geteAccount().equals(that.geteAccount()) : that.geteAccount() != null)
+            return false;
+        if (getOpinions() != null ? !getOpinions().equals(that.getOpinions()) : that.getOpinions() != null)
+            return false;
+        return getActivityStatus() == that.getActivityStatus();
 
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUserName().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + getFirtstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + getRegistered().hashCode();
+        result = 31 * result + getEmail().hashCode();
+        result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
+        result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
+        result = 31 * result + (getAvatar() != null ? Arrays.hashCode(getAvatar()) : 0);
+        result = 31 * result + (geteAccount() != null ? geteAccount().hashCode() : 0);
+        result = 31 * result + (getOpinions() != null ? getOpinions().hashCode() : 0);
+        result = 31 * result + getActivityStatus().hashCode();
+        return result;
+    }
 }
 

@@ -1,7 +1,6 @@
 package opensource.onlinestore.service;
 
 import opensource.onlinestore.Utils.Exceptions.NotFoundException;
-import opensource.onlinestore.model.dto.UserTo;
 import opensource.onlinestore.model.entity.UserEntity;
 
 import java.util.Collection;
@@ -20,8 +19,6 @@ public interface UserService {
     UserEntity getByEmail(String email) throws NotFoundException;
 
     Collection<UserEntity> getAll();
-
-    void update(UserTo user);
 
     void update(UserEntity user);
 
