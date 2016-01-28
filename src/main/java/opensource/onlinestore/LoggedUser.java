@@ -19,7 +19,7 @@ public class LoggedUser extends org.springframework.security.core.userdetails.Us
     Mapper userMapper= DozerBeanMapperSingletonWrapper.getInstance();
 
     public LoggedUser(UserEntity user) {
-        super(user.getUserName(), user.getPassword(),true, true, true,
+        super(user.getUsername(), user.getPassword(),true, true, true,
                 (!user.getActivityStatus().equals(ActivityStatus.BANNED)), user.getRoles());
         this.userDTO = userMapper.map(user,UserDTO.class);
     }

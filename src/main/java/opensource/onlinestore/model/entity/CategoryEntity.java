@@ -4,13 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "CATEGORIES",
+@Table(name = "categories",
     uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class CategoryEntity extends BaseEntity {
 
     @NotNull
     private String name;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
     private CategoryEntity parent;
 
     public String getName() {

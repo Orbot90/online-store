@@ -12,13 +12,6 @@ CREATE TABLE categories (
   characteristics_template JSON
 );
 
-CREATE TABLE orders (
-  id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
-  start_date TIMESTAMP NOT NULL,
-  delivery_type CHARACTER VARYING (255) NOT NULL,
-  address CHARACTER VARYING (255),
-  order_status CHARACTER VARYING (255) NOT NULL
-);
 
 CREATE TABLE accounts (
   id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
@@ -34,11 +27,21 @@ CREATE TABLE users (
   first_name CHARACTER VARYING (255),
   last_name CHARACTER VARYING (255),
   address CHARACTER VARYING (255),
-  registration_date TIMESTAMP NOT NULL,
+  registration_date TIMESTAMP NOT NULL DEFAULT now(),
   email CHARACTER VARYING (255) NOT NULL UNIQUE,
-  avatar BYTEA,
+  avatar OID,
   account_id BIGINT UNIQUE REFERENCES accounts (id),
   activity_status CHARACTER VARYING (255) NOT NULL
+);
+
+
+CREATE TABLE orders (
+  id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
+  start_date TIMESTAMP NOT NULL,
+  delivery_type CHARACTER VARYING (255) NOT NULL,
+  address CHARACTER VARYING (255),
+  order_status CHARACTER VARYING (255) NOT NULL,
+  user_id BIGINT NOT NULL REFERENCES users (id)
 );
 
 ALTER TABLE accounts
@@ -52,18 +55,18 @@ CREATE TABLE goods (
   category_id bigint NOT NULL REFERENCES categories (id),
   price double precision NOT NULL,
   producer CHARACTER VARYING (255) NOT NULL,
-  image BYTEA
+  image OID
 );
 
 CREATE TABLE roles (
-  id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
-  name CHARACTER VARYING (255) NOT NULL
+  name CHARACTER VARYING (255) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE messages (
   id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
   message CHARACTER VARYING (255) NOT NULL,
-  message_type CHARACTER VARYING (255) NOT NULL
+  message_type CHARACTER VARYING (255) NOT NULL,
+  user_id BIGINT NOT NULL REFERENCES users (id)
 );
 
 CREATE TABLE goods_messages (
@@ -76,19 +79,9 @@ CREATE TABLE goods_orders (
   orders_id BIGINT NOT NULL REFERENCES orders (id)
 );
 
-CREATE TABLE users_orders (
-  user_id BIGINT NOT NULL REFERENCES users (id),
-  order_id BIGINT NOT NULL REFERENCES orders (id) UNIQUE
-);
-
 CREATE TABLE users_roles (
   user_id BIGINT NOT NULL REFERENCES users (id),
-  role_id BIGINT NOT NULL REFERENCES roles (id)
-);
-
-CREATE TABLE users_messages (
-  user_id BIGINT NOT NULL REFERENCES users (id),
-  messages_id BIGINT NOT NULL REFERENCES messages (id) UNIQUE
+  role CHARACTER VARYING NOT NULL REFERENCES roles (name)
 );
 
 INSERT INTO roles (name) VALUES ('ADMIN'), ('USER'), ('CONTENT_MANAGER'), ('SUPPORT');

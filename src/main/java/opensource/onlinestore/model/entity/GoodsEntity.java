@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "GOODS")
+@Table(name = "goods")
 public class GoodsEntity extends BaseEntity {
     @NotNull
     private String name;

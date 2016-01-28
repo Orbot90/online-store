@@ -13,5 +13,13 @@ import javax.persistence.Table;
 public class OrderEntity extends BaseEntity {
 
     @ManyToOne
-    UserEntity user;
+    private UserEntity user;
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }
