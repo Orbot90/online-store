@@ -52,10 +52,11 @@ public class UserEntity extends BaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     protected Set<Role> roles;
 
-
+    @Lob
+    @Column(name = "avatar")
     protected byte[] avatar;
 
-
+    @OneToOne(mappedBy="user")
     AccountEntity eAccount;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
@@ -63,14 +64,15 @@ public class UserEntity extends BaseEntity {
     List<MessageEntity> opinions;
 
     @Enumerated(EnumType.STRING)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @Column(name = "status")
     ActivityStatus activityStatus;
 
     public UserEntity() {
     }
 
-    public UserEntity(long id, String userName, String password, String firtstName, String lastName, String address, Date registered, String email, List<OrderEntity> orders, Set<Role> roles, byte[] avatar, AccountEntity eAccount, List<MessageEntity> opinions, ActivityStatus activityStatus) {
+    public UserEntity(long id, String userName, String password, String firtstName, String lastName, String address,
+                      Date registered, String email, List<OrderEntity> orders, Set<Role> roles, byte[] avatar,
+                      AccountEntity eAccount, List<MessageEntity> opinions, ActivityStatus activityStatus) {
         super(id);
         this.userName = userName;
         this.password = password;

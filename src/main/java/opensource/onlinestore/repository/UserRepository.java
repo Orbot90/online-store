@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     UserEntity getByEmail(String email);
 
-    @Query("SELECT u FROM User u JOIN FETCH u.orders WHERE u.id = ?1") /*оставил этот метод только для тестирования*/
+    @Query("SELECT u FROM UserEntity u JOIN FETCH u.orders WHERE u.id = ?1") /*оставил этот метод только для тестирования*/
     UserEntity getByIdWithInitializedOrders(Integer id);
 
 }
