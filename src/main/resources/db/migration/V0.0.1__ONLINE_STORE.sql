@@ -91,4 +91,4 @@ CREATE TABLE users_messages (
   messages_id BIGINT NOT NULL REFERENCES messages (id) UNIQUE
 );
 
-INSERT INTO roles (name) VALUES ('ADMIN'), ('SILENCE'), ('BANNED');
+INSERT INTO roles (name) VALUES ('ADMIN'), ('USER'), ('CONTENT_MANAGER'), ('SUPPORT');
