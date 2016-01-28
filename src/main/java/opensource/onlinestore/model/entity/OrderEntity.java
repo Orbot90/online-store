@@ -1,19 +1,37 @@
 package opensource.onlinestore.model.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Alexei Huryanchyk
  */
-public class OrderEntity {
+@Entity
+@Table(name="ORDER", uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+public class OrderEntity implements Serializable{
+
+    @Id
+    @Column(name="ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy="order")
     private List<GoodsEntity> goods;
+
+    @Column(name="DATE")
     private Date startDate;
 //    private DeliveryType deliveryType;
+
+    @Column(name="ADDRESS")
     private String address;
 //    private OrderStatus orderStatus;
+
 
     public Long getId() {
         return id;
