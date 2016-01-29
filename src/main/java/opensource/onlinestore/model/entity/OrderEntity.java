@@ -10,11 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ORDERS", uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
-public class OrderEntity  extends BaseEntity implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+public class OrderEntity  extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
