@@ -1,4 +1,4 @@
-package opensource.onlinestore.model.Enums;
+package opensource.onlinestore.model.entity;
 
 /**
  * Created by Alexei Huryanchyk

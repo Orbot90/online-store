@@ -1,8 +1,5 @@
 package opensource.onlinestore.model.entity;
 
-import opensource.onlinestore.model.Enums.DeliveryType;
-import opensource.onlinestore.model.Enums.OrderStatus;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,10 +10,9 @@ import java.util.List;
  */
 @Entity
 @Table(name="ORDERS", uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
-public class OrderEntity implements Serializable{
+public class OrderEntity  extends BaseEntity implements Serializable{
 
     @Id
-    @Column(name="ID")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
@@ -30,17 +26,15 @@ public class OrderEntity implements Serializable{
             inverseJoinColumns = {@JoinColumn(name = "goods_id")})
     private List<GoodsEntity> goods;
 
-    @Column(name="START_DATE")
     private Date startDate;
 
-    @Column(name="DELIVERY_TYPE")
     @Enumerated(EnumType.STRING)
     private DeliveryType deliveryType;
 
-    @Column(name="ADDRESS")
+
     private String address;
 
-    @Column(name="ORDER_STATUS")
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
