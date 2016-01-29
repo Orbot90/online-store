@@ -1,19 +1,57 @@
 package opensource.onlinestore.model.entity;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import opensource.onlinestore.model.Enums.DeliveryType;
+import opensource.onlinestore.model.Enums.OrderStatus;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Created by maks(avto12@i.ua) on 26.01.2016.
+ * Created by Alexei Huryanchyk
  */
-
-
 @Entity
-@Table(name = "orders")
-public class OrderEntity extends BaseEntity {
+@Table(name="ORDERS", uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
+public class OrderEntity implements Serializable{
+
+    @Id
+    @Column(name="ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
+
+    @ManyToMany(targetEntity = GoodsEntity.class, cascade = {CascadeType.ALL})
+    @JoinTable(name = "GOODS_ORDERS",
+            joinColumns = {@JoinColumn(name = "orders_id")},
+            inverseJoinColumns = {@JoinColumn(name = "goods_id")})
+    private List<GoodsEntity> goods;
+
+    @Column(name="START_DATE")
+    private Date startDate;
+
+    @Column(name="DELIVERY_TYPE")
+    @Enumerated(EnumType.STRING)
+    private DeliveryType deliveryType;
+
+    @Column(name="ADDRESS")
+    private String address;
+
+    @Column(name="ORDER_STATUS")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public UserEntity getUser() {
         return user;
@@ -21,5 +59,45 @@ public class OrderEntity extends BaseEntity {
 
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public List<GoodsEntity> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<GoodsEntity> goods) {
+        this.goods = goods;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public DeliveryType getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(DeliveryType deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
