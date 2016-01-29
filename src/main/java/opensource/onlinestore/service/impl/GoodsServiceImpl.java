@@ -1,7 +1,6 @@
 package opensource.onlinestore.service.impl;
 
-import opensource.onlinestore.model.dto.GoodsDTO;
-import opensource.onlinestore.model.entity.CategoryEntity;
+import opensource.onlinestore.model.entity.GoodsEntity;
 import opensource.onlinestore.repository.GoodsRepository;
 import opensource.onlinestore.service.GoodsService;
 import org.dozer.Mapper;
@@ -13,26 +12,40 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GoodsServiceImpl implements GoodsService{
+public class GoodsServiceImpl implements GoodsService {
 
     private static final Logger LOG = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
     @Autowired
-    private GoodsRepository goodsRepository;
+    private GoodsRepository repository;
+
     @Autowired
     private Mapper beanMapper;
 
-    //todo: implement all this stuff
-
     @Override
-    public boolean addGoods(GoodsDTO goodsDTO) {
-        return true;
+    public GoodsEntity create(GoodsEntity entity) {
+        return repository.saveAndFlush(entity);
     }
 
     @Override
-    public List<GoodsDTO> getGoods(CategoryEntity category) {
-        return null;
+    public GoodsEntity update(GoodsEntity entity) {
+        return repository.saveAndFlush(entity);
     }
 
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
+
+
+    @Override
+    public GoodsEntity findById(Long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
+    public List<GoodsEntity> findAll() {
+        return repository.findAll();
+    }
 
 }

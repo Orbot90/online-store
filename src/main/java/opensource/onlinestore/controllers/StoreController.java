@@ -29,12 +29,12 @@ public class StoreController {
         return "main";
     }
 
-    //todo: Secure with hasRole("ADMIN") when security configured
-    @RequestMapping(value = "/admin/addgoods", method = RequestMethod.POST)
-    @ResponseBody
-    public boolean addGoods(GoodsDTO goods) {
-        return goodsService.addGoods(goods);
-    }
+//    //todo: Secure with hasRole("ADMIN") when security configured
+//    @RequestMapping(value = "/admin/addgoods", method = RequestMethod.POST)
+//    @ResponseBody
+//    public boolean addGoods(GoodsDTO goods) {
+//        return goodsService.addGoods(goods);
+//    }
 
 //    @RequestMapping(value = "/getgoods", method = RequestMethod.GET)
 //    @ResponseBody

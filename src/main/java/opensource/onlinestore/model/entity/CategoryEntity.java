@@ -4,14 +4,23 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "CATEGORIES",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
+@Table(name = "categories",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class CategoryEntity extends BaseEntity {
 
     @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
+
     @OneToOne
     private CategoryEntity parent;
+
+    @NotNull
+    @Column(name = "characteristics_template", columnDefinition = "json")
+    private String characteristicsTemplate;
+
+    public CategoryEntity() {
+    }
 
     public String getName() {
         return name;
@@ -29,22 +38,33 @@ public class CategoryEntity extends BaseEntity {
         this.parent = parent;
     }
 
+    public String getCharacteristicsTemplate() {
+        return characteristicsTemplate;
+    }
+
+    public void setCharacteristicsTemplate(String characteristicsTemplate) {
+        this.characteristicsTemplate = characteristicsTemplate;
+    }
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
-        if (!(o instanceof CategoryEntity)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         CategoryEntity that = (CategoryEntity) o;
 
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
-        return !(getParent() != null ? !getParent().equals(that.getParent()) : that.getParent() != null);
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
+        return characteristicsTemplate != null ? characteristicsTemplate.equals(that.characteristicsTemplate) : that.characteristicsTemplate == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getParent() != null ? getParent().hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (parent != null ? parent.hashCode() : 0);
+        result = 31 * result + (characteristicsTemplate != null ? characteristicsTemplate.hashCode() : 0);
         return result;
     }
 }
