@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserEntity registerNewUser(UserDTO userDTO) {
         UserEntity newUser = beanMapper.map(userDTO, UserEntity.class);
         newUser.setActivityStatus(ActivityStatus.ACTIVE);
-        newUser.addRole(Role.ROLE_USER);
+        newUser.addRole(Role.USER);
         newUser = UserUtils.prepareToSave(newUser);
         userRepository.save(newUser);
         return newUser;
