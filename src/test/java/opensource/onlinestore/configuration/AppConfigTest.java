@@ -6,12 +6,16 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 
+/**
+ * Created by orbot on 29.01.16.
+ */
 @Configuration
-@ComponentScan(basePackages = "opensource.onlinestore")
-public class AppConfig {
-
+@Import(JPAConfigTest.class)
+@ComponentScan(basePackages = {"opensource.onlinestore.service"})
+public class AppConfigTest {
 
     @Bean
     public PropertyPlaceholderConfigurer propertyConfigurer() {
@@ -20,9 +24,9 @@ public class AppConfig {
         return configurer;
     }
 
+
     @Bean
     public Mapper beanMapper() {
         return new DozerBeanMapper();
     }
-
 }

@@ -6,6 +6,8 @@ import javax.persistence.*;
 public class BaseEntity {
 
     @Id
+    @SequenceGenerator(name = "store_sequence", sequenceName = "store_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "store_sequence")
     private Long id;
 
     public BaseEntity() {

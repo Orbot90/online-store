@@ -13,7 +13,9 @@ import java.util.List;
  * Created by maks(avto12@i.ua) on 27.01.2016.
  */
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+
+    UserEntity findByUsername(String username);
 
     UserEntity getByEmail(String email);
 

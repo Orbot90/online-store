@@ -1,7 +1,10 @@
 package opensource.onlinestore.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -26,7 +29,6 @@ public class UserEntity extends BaseEntity {
     @NotEmpty
     private String lastName;
 
-    @NotEmpty
     private String address;
 
     private Date registrationDate = new Date();
@@ -60,6 +62,7 @@ public class UserEntity extends BaseEntity {
     private ActivityStatus activityStatus;
 
     public UserEntity() {
+        this.roles = new HashSet<>();
     }
 
     public UserEntity(long id, String userName, String password, String firstName, String lastName, String address,
@@ -85,7 +88,7 @@ public class UserEntity extends BaseEntity {
         return username;
     }
 
-    public void setUserName(String userName) {
+    public void setUsername(String userName) {
         this.username = userName;
     }
 
@@ -184,6 +187,14 @@ public class UserEntity extends BaseEntity {
     public void setRoles(Collection<Role> roles) {
         this.roles = EnumSet.copyOf(roles);
     }
+
+    public void addRole(Role role) {
+        if(this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+        this.roles.add(role);
+    }
+
 
     @Override
     public boolean equals(Object o) {

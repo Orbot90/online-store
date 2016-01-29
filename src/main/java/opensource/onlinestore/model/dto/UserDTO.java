@@ -1,5 +1,6 @@
 package opensource.onlinestore.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
  * Created by maks(avto12@i.ua) on 27.01.2016.
  */
 public class UserDTO implements Serializable{
-    static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @NotEmpty
     protected String username;
@@ -25,6 +26,7 @@ public class UserDTO implements Serializable{
     @NotEmpty
     protected String email;
 
+    @JsonIgnore
     @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
     protected String password;
 

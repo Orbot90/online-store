@@ -12,6 +12,7 @@
     <properties>
         <spring.version>4.2.0.RELEASE</spring.version>
         <logback.version>1.1.2</logback.version>
+        <javax.el-api.version>2.2.4</javax.el-api.version>
     </properties>
 
     <dependencies>
@@ -51,6 +52,16 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>${javax.el-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -114,6 +125,11 @@
         <!--security-->
         <dependency>
             <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.0.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
@@ -126,7 +142,7 @@
 
     <build>
         <filters>
-            <filter>src/main/resources/persistence.properties</filter>
+            <filter>src/main/resources/application.properties</filter>
         </filters>
         <resources>
             <resource>
@@ -167,7 +183,7 @@
                     <version>1.0-alpha-2</version>
                     <configuration>
                         <files>
-                            <file>src/main/resources/persistence.properties</file>
+                            <file>src/main/resources/application.properties</file>
                         </files>
                     </configuration>
                     <executions>
