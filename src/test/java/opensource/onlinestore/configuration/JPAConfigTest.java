@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
+@Profile("test")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "opensource.onlinestore.repository")

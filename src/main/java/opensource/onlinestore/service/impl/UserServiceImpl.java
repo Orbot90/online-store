@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public UserEntity save(UserEntity user) {
-        return userRepository.save(user);
+        return userRepository.saveAndFlush(user);
     }
 
     public void delete(Long id) throws NotFoundException {
@@ -79,12 +80,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.getByEmail(email);
     }
 
-    public Collection<UserEntity> getAll() {
+    public List<UserEntity> getAll() {
         return userRepository.findAll();
     }
 
-    public void update(UserEntity user) {
-        userRepository.save(user);
+    public UserEntity update(UserEntity user) {
+       return userRepository.saveAndFlush(user);
     }
 
     @Transactional(readOnly = true)
