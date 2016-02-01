@@ -1,12 +1,10 @@
 package opensource.onlinestore.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 /**
@@ -51,14 +49,16 @@ public class UserEntity extends BaseEntity {
     @Lob
     private byte[] avatar;
 
-    @OneToOne(mappedBy="user")
+    @OneToOne(mappedBy = "user")
     private AccountEntity eAccount;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("creationDate DESC")
     private List<MessageEntity> opinions;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "activity_status", nullable = false)
     private ActivityStatus activityStatus;
 
     public UserEntity() {
@@ -164,7 +164,7 @@ public class UserEntity extends BaseEntity {
         return eAccount;
     }
 
-    public void seteAccount(AccountEntity eAccount) {
+    public void setAccount(AccountEntity eAccount) {
         this.eAccount = eAccount;
     }
 
@@ -189,7 +189,7 @@ public class UserEntity extends BaseEntity {
     }
 
     public void addRole(Role role) {
-        if(this.roles == null) {
+        if (this.roles == null) {
             this.roles = new HashSet<>();
         }
         this.roles.add(role);

@@ -3,9 +3,8 @@ package opensource.onlinestore.service;
 import opensource.onlinestore.Utils.Exceptions.NotFoundException;
 import opensource.onlinestore.model.dto.UserDTO;
 import opensource.onlinestore.model.entity.UserEntity;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by maks(avto12@i.ua) on 27.01.2016.
@@ -24,9 +23,9 @@ public interface UserService {
 
     UserEntity getByEmail(String email) throws NotFoundException;
 
-    Collection<UserEntity> getAll();
+    List<UserEntity> getAll();
 
-    void update(UserEntity user);
+    UserEntity update(UserEntity user);
 
     UserEntity getWithOrders(int id);
 }
