@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <users id="1"
+           username="User_01"
+           password="123456_01"
+           first_name="firstName_01"
+           last_name="LastName_01"
+           address="Street 01"
+           registration_date="2016-02-02 17:32:37.530000"
+           email="www@ss.com_01"
+           activity_status="ACTIVE"
+           account_id="1"
+    />
+</dataset>

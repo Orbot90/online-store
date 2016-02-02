@@ -49,8 +49,9 @@ public class UserEntity extends BaseEntity {
     @Lob
     private byte[] avatar;
 
-    @OneToOne(mappedBy = "user")
-    private AccountEntity eAccount;
+    @OneToOne
+    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    private AccountEntity account;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("creationDate DESC")
@@ -79,7 +80,7 @@ public class UserEntity extends BaseEntity {
         this.orders = orders;
         this.roles = roles;
         this.avatar = avatar;
-        this.eAccount = eAccount;
+        this.account = eAccount;
         this.opinions = opinions;
         this.activityStatus = activityStatus;
     }
@@ -160,12 +161,12 @@ public class UserEntity extends BaseEntity {
         this.avatar = avatar;
     }
 
-    public AccountEntity geteAccount() {
-        return eAccount;
+    public AccountEntity getAccount() {
+        return account;
     }
 
     public void setAccount(AccountEntity eAccount) {
-        this.eAccount = eAccount;
+        this.account = eAccount;
     }
 
     public List<MessageEntity> getOpinions() {
@@ -213,7 +214,7 @@ public class UserEntity extends BaseEntity {
         if (getOrders() != null ? !getOrders().equals(that.getOrders()) : that.getOrders() != null) return false;
         if (getRoles() != null ? !getRoles().equals(that.getRoles()) : that.getRoles() != null) return false;
         if (!Arrays.equals(getAvatar(), that.getAvatar())) return false;
-        if (geteAccount() != null ? !geteAccount().equals(that.geteAccount()) : that.geteAccount() != null)
+        if (getAccount() != null ? !getAccount().equals(that.getAccount()) : that.getAccount() != null)
             return false;
         if (getOpinions() != null ? !getOpinions().equals(that.getOpinions()) : that.getOpinions() != null)
             return false;
@@ -233,7 +234,7 @@ public class UserEntity extends BaseEntity {
         result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
         result = 31 * result + (getRoles() != null ? getRoles().hashCode() : 0);
         result = 31 * result + (getAvatar() != null ? Arrays.hashCode(getAvatar()) : 0);
-        result = 31 * result + (geteAccount() != null ? geteAccount().hashCode() : 0);
+        result = 31 * result + (getAccount() != null ? getAccount().hashCode() : 0);
         result = 31 * result + (getOpinions() != null ? getOpinions().hashCode() : 0);
         result = 31 * result + getActivityStatus().hashCode();
         return result;
