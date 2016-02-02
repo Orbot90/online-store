@@ -16,7 +16,8 @@ public class AccountEntity extends BaseEntity {
     @Column(name = "amount")
     private Double amount;
 
-    @OneToOne
+    @OneToOne(mappedBy = "account")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private UserEntity user;
 
     public AccountEntity() {
