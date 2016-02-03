@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 public enum Role implements GrantedAuthority {
     USER,
     ADMIN,
-    CONTENT_MANGER,
+    CONTENT_MANAGER,
     SUPPORT;
 
     @Override
