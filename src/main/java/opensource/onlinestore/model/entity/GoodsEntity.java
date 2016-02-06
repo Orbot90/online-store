@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-@Table(name = "goods")
+@Table(name = "goods", uniqueConstraints = @UniqueConstraint(columnNames = {"article"}))
 public class GoodsEntity extends BaseEntity {
 
     @NotNull
@@ -121,12 +121,10 @@ public class GoodsEntity extends BaseEntity {
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (article != null ? !article.equals(that.article) : that.article != null) return false;
-        if (count != null ? !count.equals(that.count) : that.count != null) return false;
         if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (producer != null ? !producer.equals(that.producer) : that.producer != null) return false;
-        if (!Arrays.equals(image, that.image)) return false;
-        return opinions != null ? opinions.equals(that.opinions) : that.opinions == null;
+        return Arrays.equals(image, that.image);
 
     }
 
@@ -134,7 +132,6 @@ public class GoodsEntity extends BaseEntity {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (article != null ? article.hashCode() : 0);
-        result = 31 * result + (count != null ? count.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (producer != null ? producer.hashCode() : 0);

@@ -1,13 +1,21 @@
 package opensource.onlinestore.model.dto;
 
-import opensource.onlinestore.model.entity.CategoryEntity;
-
 public class GoodsDTO {
+    private String article;
     private String name;
     private Double price;
     private Long count;
-    private CategoryEntity category;
+    private String categoryName;
     private String producer;
+    private String errorDescription;
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
 
     public String getName() {
         return name;
@@ -25,12 +33,12 @@ public class GoodsDTO {
         this.count = count;
     }
 
-    public CategoryEntity getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Double getPrice() {
@@ -47,5 +55,13 @@ public class GoodsDTO {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
     }
 }

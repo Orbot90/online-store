@@ -1,4 +1,4 @@
-package opensource.onlinestore.error;
+package opensource.onlinestore.Utils.Exceptions;
 
 import org.springframework.validation.Errors;
 

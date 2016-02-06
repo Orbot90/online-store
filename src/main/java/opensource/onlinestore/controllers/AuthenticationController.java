@@ -1,7 +1,6 @@
 package opensource.onlinestore.controllers;
 
-import opensource.onlinestore.LoggedUser;
-import opensource.onlinestore.error.InvalidRequestException;
+import opensource.onlinestore.Utils.Exceptions.InvalidRequestException;
 import opensource.onlinestore.model.authentication.UserAuthentication;
 import opensource.onlinestore.model.dto.RegistrationResponseDTO;
 import opensource.onlinestore.model.dto.UserDTO;

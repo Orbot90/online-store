@@ -10,6 +10,8 @@ public interface GoodsService {
 
     boolean addGoods(GoodsDTO goodsDTO);
 
+    boolean addListOfGoods(List<GoodsDTO> goodsList);
+
     List<GoodsDTO> getGoods(CategoryEntity category);
 
     GoodsEntity save(GoodsEntity entity);
@@ -21,4 +23,8 @@ public interface GoodsService {
     GoodsEntity get(Long id);
 
     List<GoodsEntity> getAll();
+
+    GoodsDTO convertEntityToDTO(GoodsEntity goodsEntity);
+
+    GoodsEntity convertDTOToEntity(GoodsDTO goodsDTO);
 }

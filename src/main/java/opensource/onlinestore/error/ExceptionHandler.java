@@ -1,5 +1,6 @@
 package opensource.onlinestore.error;
 
+import opensource.onlinestore.Utils.Exceptions.InvalidRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
