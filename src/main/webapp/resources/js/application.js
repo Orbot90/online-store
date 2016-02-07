@@ -11,6 +11,10 @@ var app = angular.module("store", ["ngRoute"])
                 templateUrl: '/login.html',
                 controller: 'LoginController'
             })
+            .when('/uploadreg', {
+                templateUrl: '/upload.html',
+                controller: 'RegistriesController'
+            })
             .otherwise({redirectTo: '/login'})
     }])
     .run(function($rootScope, $location) {
