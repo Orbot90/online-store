@@ -74,15 +74,17 @@ public class GoodsParserImpl implements GoodsParser {
                     ));
 
             List<File> xlsFiles = filesMap.get(GoodsRegistryType.XLS);
+            if(xlsFiles == null) {
+                xlsFiles = new ArrayList<>();
+            }
             List<File> csvFiles = filesMap.get(GoodsRegistryType.CSV);
+            if(csvFiles == null) {
+                csvFiles = new ArrayList<>();
+            }
 
             List<GoodsDTO> goods = new ArrayList<>();
-            if(xlsFiles != null) {
-                goods.addAll(xlsGoodsParser.parseGoodsFromFiles(xlsFiles));
-            }
-            if(csvFiles != null) {
-                goods.addAll(csvParser.parseGoodsFromFiles(csvFiles));
-            }
+            goods.addAll(xlsGoodsParser.parseGoodsFromFiles(xlsFiles));
+            goods.addAll(csvParser.parseGoodsFromFiles(csvFiles));
 
             try {
                 goodsService.addListOfGoods(goods);
