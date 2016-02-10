@@ -67,8 +67,9 @@ public class StoreController {
         String fileName = dateFormat.format(new Date()) + "_goods_registry";
         for(int i = 0; i < files.size(); i++) {
             MultipartFile file = files.get(i);
-            File destFile = new File(registriesDir + File.separator + i + fileName +
-                    file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.')));
+            File destFile = new File(registriesDir + File.separator + i + fileName
+                    + file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf('.'))
+                    + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.')));
             file.transferTo(destFile);
         }
     }

@@ -3,6 +3,7 @@ package opensource.onlinestore.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,12 @@ public class StoreScheduler {
     private static final Logger LOG = LoggerFactory.getLogger(StoreScheduler.class);
 
     @Autowired
-    XlsGoodsParser xlsGoodsParser;
+    private GoodsParser goodsParser;
 
     @Scheduled(fixedDelay = 1000L * 60 * 60)
     public void launchXlsParser() {
-        LOG.info("Launching xlsGoodsParser");
-        xlsGoodsParser.parseGoods();
+        LOG.info("Launching goodsParser");
+        goodsParser.parseGoods();
     }
 
 }

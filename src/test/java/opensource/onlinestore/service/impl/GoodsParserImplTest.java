@@ -6,8 +6,8 @@ import opensource.onlinestore.configuration.AppConfigTest;
 import opensource.onlinestore.model.dto.GoodsDTO;
 import opensource.onlinestore.model.entity.GoodsEntity;
 import opensource.onlinestore.repository.GoodsRepository;
+import opensource.onlinestore.service.GoodsParser;
 import opensource.onlinestore.service.GoodsService;
-import opensource.onlinestore.service.XlsGoodsParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ import java.io.IOException;
 @ContextConfiguration(classes = {AppConfigTest.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class XlsGoodsParserImplTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class GoodsParserImplTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     private static final String REGISTRIES_DIR = "goodsregistries/";
     private static final String ARCHIVE_DIR = "archive/";
@@ -42,7 +42,7 @@ public class XlsGoodsParserImplTest extends AbstractTransactionalJUnit4SpringCon
     private static final String TEMPLATE_EXTENSION = ".tmpl";
 
     @Autowired
-    private XlsGoodsParser goodsParser;
+    private GoodsParser goodsParser;
     @Autowired
     private GoodsRepository goodsRepository;
     @Autowired
@@ -102,7 +102,7 @@ public class XlsGoodsParserImplTest extends AbstractTransactionalJUnit4SpringCon
         Assert.assertNotNull(files);
         for(File file : files) {
             String fileName = file.getName();
-            Assert.assertTrue(fileName.matches("\\d{2}-\\d{2}-\\d{4}\\(\\d{2}:\\d{2}\\)_archive_test\\d*.xls"));
+            Assert.assertTrue(fileName.matches("\\d{2}-\\d{2}-\\d{4}\\(\\d{2}:\\d{2}\\)_archive_test\\d*.(xls|csv)"));
         }
     }
 
