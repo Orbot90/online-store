@@ -1,6 +1,5 @@
 package opensource.onlinestore.service.impl;
 
-import opensource.onlinestore.Utils.Exceptions.SameArticleException;
 import opensource.onlinestore.model.dto.GoodsDTO;
 import opensource.onlinestore.model.entity.CategoryEntity;
 import opensource.onlinestore.model.entity.GoodsEntity;
@@ -14,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -30,7 +31,27 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     ErrorGoodsStorageBean errorGoodsStorage;
 
-    //todo: implement all this stuff
+    @Override
+    public boolean isCharacteristicsValid(GoodsEntity goods) {
+        return isCharacteristicsValid(convertEntityToDTO(goods));
+    }
+
+    @Override
+    public boolean isCharacteristicsValid(GoodsDTO goods) {
+        if(goods.getCharacteristicsMap() == null) {
+            return true;
+        }
+        boolean valid = true;
+        CategoryEntity category = categoryRepository.findByName(goods.getCategoryName());
+        List<String> characteristicKeys = category.getCharacteristicsKeys();
+        Map<String, String> characteristics = goods.getCharacteristicsMap();
+        for(String key : characteristics.keySet()) {
+            if(!characteristicKeys.contains(key)) {
+                valid = false;
+            }
+        }
+        return valid;
+    }
 
     @Override
     @Transactional
@@ -38,13 +59,14 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsEntity goodsEntity = beanMapper.map(goodsDTO, GoodsEntity.class);
         CategoryEntity category = categoryRepository.findByName(goodsDTO.getCategoryName());
         goodsEntity.setCategory(category);
-        goodsRepository.save(goodsEntity);
+        save(goodsEntity);
         return true;
     }
 
     @Override
     @Transactional
     public boolean addListOfGoods(List<GoodsDTO> goodsList) {
+        boolean success = true;
         for(GoodsDTO goods : goodsList) {
             GoodsEntity retrievedGoods = goodsRepository.findByArticle(goods.getArticle());
 
@@ -60,7 +82,7 @@ public class GoodsServiceImpl implements GoodsService {
                 retrievedGoods.setCount(goods.getCount() + retrievedGoods.getCount());
                 goodsRepository.save(retrievedGoods);
             } else {
-                addGoods(goods);
+                success = success && addGoods(goods);
             }
         }
         return true;
@@ -73,6 +95,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public GoodsEntity save(GoodsEntity entity) {
+        if(!isCharacteristicsValid(entity)) {
+            throw new ConstraintViolationException("Characteristics not valid", null);
+        }
         return goodsRepository.saveAndFlush(entity);
     }
 
@@ -100,6 +125,7 @@ public class GoodsServiceImpl implements GoodsService {
     public GoodsDTO convertEntityToDTO(GoodsEntity goodsEntity) {
         GoodsDTO goodsDTO = beanMapper.map(goodsEntity, GoodsDTO.class);
         goodsDTO.setCategoryName(goodsEntity.getCategory().getName());
+        goodsDTO.setCharacteristicsMap(goodsEntity.getCharachteristicsAsMap());
         return goodsDTO;
     }
 
@@ -108,6 +134,7 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsEntity goodsEntity = beanMapper.map(goodsDTO, GoodsEntity.class);
         CategoryEntity category = categoryRepository.findByName(goodsDTO.getCategoryName());
         goodsEntity.setCategory(category);
+        goodsEntity.setCharachteristicsFromMap(goodsDTO.getCharacteristicsMap());
         return goodsEntity;
     }
 

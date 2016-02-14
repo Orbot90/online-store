@@ -20,8 +20,11 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -168,6 +171,9 @@ public class RelationshipsGoodsCategoriesTest extends AbstractTransactionalJUnit
         //1.2 create goods
         GoodsEntity goodsEntity = GoodsEntityUtil.createGoodsEntity();
         goodsEntity.setCategory(categoryEntity);
+        Map<String, String> characteristicsMap = new HashMap<>();
+        characteristicsMap.put("age", "200");
+        goodsEntity.setCharachteristicsFromMap(characteristicsMap);
         GoodsEntity actualGoodsEntity = goodsService.save(goodsEntity);
 
         //when
@@ -176,6 +182,25 @@ public class RelationshipsGoodsCategoriesTest extends AbstractTransactionalJUnit
         // then
         List<CategoryEntity> categoryEntityList = categoryService.getAll();
         assertTrue(categoryEntityList.contains(categoryEntity));
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    @Rollback
+    @DatabaseSetup({"classpath:categories.xml", "classpath:goods.xml"})
+    public void testShouldRaiseConstraintViolationException() {
+        // given
+        //1.1 create category
+        CategoryEntity categoryEntity = CategoryEntityUtil.createCategory();
+        categoryService.save(categoryEntity);
+
+        //1.2 create goods
+        GoodsEntity goodsEntity = GoodsEntityUtil.createGoodsEntity();
+        goodsEntity.setCategory(categoryEntity);
+        Map<String, String> characteristicsMap = new HashMap<>();
+        characteristicsMap.put("age", "200");
+        characteristicsMap.put("strangecharacteristic", "lol");
+        goodsEntity.setCharachteristicsFromMap(characteristicsMap);
+        goodsService.save(goodsEntity);
     }
 
 }

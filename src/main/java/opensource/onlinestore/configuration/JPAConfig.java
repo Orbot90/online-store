@@ -29,6 +29,8 @@ public class JPAConfig {
     private String database;
     @Value("${data.hbm2ddl.auto}")
     private String hbm2ddlAuto;
+    @Value("${hibernate.dialect}")
+    private String dialect;
 
     @Bean
     public DataSource dataSource() {
@@ -55,6 +57,7 @@ public class JPAConfig {
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         jpaProperties.setProperty("hibernate.ejb.naming_strategy", "opensource.onlinestore.configuration.CorrectNamingStrategy");
+        jpaProperties.setProperty("hibernate.dialect", dialect);
         entityManagerFactory.setJpaProperties(jpaProperties);
         return entityManagerFactory;
     }

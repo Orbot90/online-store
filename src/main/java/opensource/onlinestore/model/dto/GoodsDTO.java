@@ -1,5 +1,7 @@
 package opensource.onlinestore.model.dto;
 
+import java.util.Map;
+
 public class GoodsDTO {
     private String article;
     private String name;
@@ -8,6 +10,7 @@ public class GoodsDTO {
     private String categoryName;
     private String producer;
     private String errorDescription;
+    private Map<String, String> characteristicsMap;
 
     public String getArticle() {
         return article;
@@ -63,5 +66,13 @@ public class GoodsDTO {
 
     public void setErrorDescription(String errorDescription) {
         this.errorDescription = errorDescription;
+    }
+
+    public Map<String, String> getCharacteristicsMap() {
+        return characteristicsMap;
+    }
+
+    public void setCharacteristicsMap(Map<String, String> characteristicsMap) {
+        this.characteristicsMap = characteristicsMap;
     }
 }

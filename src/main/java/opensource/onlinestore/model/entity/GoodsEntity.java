@@ -1,13 +1,29 @@
 package opensource.onlinestore.model.entity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import opensource.onlinestore.model.type.StringJsonUserType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+@TypeDefs( {@TypeDef( name= "StringJsonObject", typeClass = StringJsonUserType.class)})
 @Entity
 @Table(name = "goods", uniqueConstraints = @UniqueConstraint(columnNames = {"article"}))
 public class GoodsEntity extends BaseEntity {
+
+    @Transient
+    private static final Logger LOG = LoggerFactory.getLogger(GoodsEntity.class);
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -33,6 +49,9 @@ public class GoodsEntity extends BaseEntity {
     @NotNull
     @Column(name = "producer", nullable = false)
     private String producer;
+
+    @Type(type = "StringJsonObject")
+    private String characteristics;
 
     //TODO ?????
     @Transient
@@ -109,6 +128,39 @@ public class GoodsEntity extends BaseEntity {
 
     public void setOpinions(List<MessageEntity> opinions) {
         this.opinions = opinions;
+    }
+
+    public String getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public Map<String,String> getCharachteristicsAsMap() {
+        if(characteristics == null) {
+            return null;
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> characteristic = null;
+        try {
+            characteristic = mapper.readValue(characteristics, new TypeReference<Map<String, String>>(){});
+        } catch (IOException e) {
+            LOG.error("Could not parse json", e);
+        }
+        return characteristic;
+    }
+
+    public void setCharachteristicsFromMap(Map<String, String> charachteristics) {
+        ObjectMapper mapper = new ObjectMapper();
+        String characteristic = "";
+        try {
+            characteristic = mapper.writeValueAsString(charachteristics);
+        } catch (JsonProcessingException e) {
+            LOG.error("Could not make json from map", e);
+        }
+        this.characteristics = characteristic;
     }
 
     @Override

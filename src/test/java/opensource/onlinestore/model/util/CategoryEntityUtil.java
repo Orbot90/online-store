@@ -13,7 +13,9 @@ public class CategoryEntityUtil {
     public static CategoryEntity createCategory() {
         CategoryEntity entity = new CategoryEntity();
         entity.setName("Бытовая техника");
-        entity.setCharacteristicsTemplate("{age:100}");
+        List<String> characteristicKeys = new ArrayList<>();
+        characteristicKeys.add("age");
+        entity.setCharacteristicsTemplateFromList(characteristicKeys);
         return entity;
     }
 
@@ -22,7 +24,9 @@ public class CategoryEntityUtil {
         for (int i = 0; i < 10; i++) {
             CategoryEntity entity = new CategoryEntity();
             entity.setName("Бытовая техника_" + i);
-            entity.setCharacteristicsTemplate("{age:100" + i + "}");
+            List<String> characteristicKeys = new ArrayList<>();
+            characteristicKeys.add("age");
+            entity.setCharacteristicsTemplateFromList(characteristicKeys);
             list.add(entity);
         }
         return list;

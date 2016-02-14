@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface GoodsService {
 
+    boolean isCharacteristicsValid(GoodsEntity goods);
+
+    boolean isCharacteristicsValid(GoodsDTO goods);
+
     boolean addGoods(GoodsDTO goodsDTO);
 
     boolean addListOfGoods(List<GoodsDTO> goodsList);
