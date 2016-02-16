@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -50,6 +53,15 @@ public class JPAConfigTest {
         return dataSource;
     }
 
+//    @Bean
+//    public EmbeddedDatabase dataSource() {
+//        return new EmbeddedDatabaseBuilder().
+//                setType(EmbeddedDatabaseType.H2)
+//                .addScript("db/migration/V0.0.1__ONLINE_STORE.sql")
+//                .addScript("db/migration/V0.0.2__ONLINE_STORE.sql")
+//                .build();
+//    }
+
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -66,7 +78,7 @@ public class JPAConfigTest {
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter());
         entityManagerFactory.setPackagesToScan("opensource.onlinestore.model");
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         jpaProperties.setProperty("hibernate.ejb.naming_strategy", "opensource.onlinestore.configuration.CorrectNamingStrategy");
         jpaProperties.setProperty("hibernate.dialect", dialect);
         entityManagerFactory.setJpaProperties(jpaProperties);

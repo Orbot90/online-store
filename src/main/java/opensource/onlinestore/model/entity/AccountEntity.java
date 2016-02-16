@@ -16,8 +16,11 @@ public class AccountEntity extends BaseEntity {
     @Column(name = "amount")
     private Double amount;
 
-    @OneToOne(mappedBy = "account")
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @OneToOne(cascade = {CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.DETACH,
+            CascadeType.REFRESH})
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private UserEntity user;
 
     public AccountEntity() {
@@ -62,7 +65,7 @@ public class AccountEntity extends BaseEntity {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (user != null ? 31 : 0);
         return result;
     }
 }

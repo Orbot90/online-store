@@ -12,7 +12,8 @@ import java.util.*;
  */
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email"),
+        @UniqueConstraint(columnNames = "username", name = "unique_username")})
 public class UserEntity extends BaseEntity {
 
     @NotEmpty
@@ -36,7 +37,7 @@ public class UserEntity extends BaseEntity {
     @NotEmpty
     private String email;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     @OrderBy("creationDate DESC")
     private List<OrderEntity> orders;
 
@@ -49,8 +50,8 @@ public class UserEntity extends BaseEntity {
     @Lob
     private byte[] avatar;
 
-    @OneToOne
-    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id", unique = true)
     private AccountEntity account;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
