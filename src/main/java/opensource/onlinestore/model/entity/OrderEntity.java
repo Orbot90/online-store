@@ -13,10 +13,10 @@ import java.util.List;
 @Table(name = "orders")
 public class OrderEntity extends BaseEntity {
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinTable(name = "goods_orders",
-            joinColumns = @JoinColumn(name = "goods_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "orders_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "orders_id"),
+            inverseJoinColumns = @JoinColumn(name = "goods_id"))
     @OrderBy("creationDate ASC")
     private List<GoodsEntity> goods;
 
@@ -39,7 +39,7 @@ public class OrderEntity extends BaseEntity {
     private OrderStatus orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     public OrderEntity() {

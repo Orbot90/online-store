@@ -19,7 +19,7 @@ import java.util.Map;
 
 @TypeDefs( {@TypeDef( name= "StringJsonObject", typeClass = StringJsonUserType.class)})
 @Entity
-@Table(name = "goods", uniqueConstraints = @UniqueConstraint(columnNames = {"article"}))
+@Table(name = "goods")
 public class GoodsEntity extends BaseEntity {
 
     @Transient

@@ -17,7 +17,7 @@ CREATE TABLE accounts (
   id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('store_sequence'),
   name CHARACTER VARYING (255) UNIQUE,
   amount DOUBLE PRECISION,
-  user_id BIGINT
+  user_id BIGINT UNIQUE
 );
 
 CREATE TABLE users (
@@ -30,7 +30,7 @@ CREATE TABLE users (
   registration_date TIMESTAMP NOT NULL DEFAULT now(),
   email CHARACTER VARYING (255) NOT NULL UNIQUE,
   avatar OID,
-  account_id BIGINT UNIQUE REFERENCES accounts (id),
+  account_id BIGINT REFERENCES accounts (id),
   activity_status CHARACTER VARYING (255) NOT NULL
 );
 
