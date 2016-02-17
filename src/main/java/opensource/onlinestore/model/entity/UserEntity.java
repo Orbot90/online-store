@@ -54,7 +54,7 @@ public class UserEntity extends BaseEntity {
     @JoinColumn(name = "account_id", referencedColumnName = "id", unique = true)
     private AccountEntity account;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     @OrderBy("creationDate DESC")
     private List<MessageEntity> opinions;
 

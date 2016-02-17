@@ -19,7 +19,7 @@ public class MessageEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MessageType messageType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 

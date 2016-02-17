@@ -38,7 +38,7 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "order_status", nullable = false)
     private OrderStatus orderStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 

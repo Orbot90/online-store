@@ -61,7 +61,7 @@ public class RelationshipsUserAccountTest extends AbstractTransactionalJUnit4Spr
         UserEntity userEntity = userService.get(1L);
 
         // then
-        assertEquals(accountEntity.getUser(), userEntity);
+        assertEquals(accountEntity.getUser(), userEntity); //TODO : DBUnit при заполнении таблиц accounts, users не заполняет поле accounts -> user_id. Тест переделан в interaction RelationshipsUserAccountTest
     }
 
 }

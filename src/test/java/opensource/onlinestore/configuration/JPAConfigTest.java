@@ -78,7 +78,7 @@ public class JPAConfigTest {
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter());
         entityManagerFactory.setPackagesToScan("opensource.onlinestore.model");
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         jpaProperties.setProperty("hibernate.ejb.naming_strategy", "opensource.onlinestore.configuration.CorrectNamingStrategy");
         jpaProperties.setProperty("hibernate.dialect", dialect);
         entityManagerFactory.setJpaProperties(jpaProperties);
