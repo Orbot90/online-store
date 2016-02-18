@@ -4,6 +4,8 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import opensource.onlinestore.configuration.AppConfigTest;
 import opensource.onlinestore.model.entity.*;
+import opensource.onlinestore.model.enums.DeliveryType;
+import opensource.onlinestore.model.enums.OrderStatus;
 import opensource.onlinestore.model.util.UserEntityUtil;
 import opensource.onlinestore.service.GoodsService;
 import opensource.onlinestore.service.OrderService;

@@ -1,4 +1,7 @@
 package opensource.onlinestore.model.entity;
+import opensource.onlinestore.model.enums.DeliveryType;
+import opensource.onlinestore.model.enums.OrderStatus;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

@@ -1,5 +1,7 @@
 package opensource.onlinestore.model.entity;
 
+import opensource.onlinestore.model.enums.MessageType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

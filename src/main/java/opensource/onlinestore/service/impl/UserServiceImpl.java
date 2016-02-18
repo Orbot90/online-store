@@ -5,8 +5,8 @@ import opensource.onlinestore.Utils.Exceptions.NotFoundException;
 import opensource.onlinestore.Utils.UserUtils;
 import opensource.onlinestore.model.authentication.UserAuthentication;
 import opensource.onlinestore.model.dto.UserDTO;
-import opensource.onlinestore.model.entity.ActivityStatus;
-import opensource.onlinestore.model.entity.Role;
+import opensource.onlinestore.model.enums.ActivityStatus;
+import opensource.onlinestore.model.enums.Role;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.repository.UserRepository;
 import opensource.onlinestore.service.UserService;
@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package opensource.onlinestore.service.interaction;
 
 import opensource.onlinestore.configuration.AppConfigTest;
-import opensource.onlinestore.model.entity.Role;
+import opensource.onlinestore.model.enums.Role;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.model.util.UserEntityUtil;
 import opensource.onlinestore.service.UserService;

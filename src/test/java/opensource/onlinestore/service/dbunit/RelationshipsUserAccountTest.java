@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 
 
 /**
@@ -49,19 +49,4 @@ public class RelationshipsUserAccountTest extends AbstractTransactionalJUnit4Spr
         // then
         assertEquals(accountEntity, userEntity.getAccount());
     }
-
-    @Test
-    @Rollback
-    @DatabaseSetup({"classpath:accounts.xml", "classpath:users.xml"})
-    public void testGetUserAccount(){
-        // given
-        AccountEntity accountEntity = accountService.get(1L);
-
-        // when
-        UserEntity userEntity = userService.get(1L);
-
-        // then
-        assertEquals(accountEntity.getUser(), userEntity); //TODO : DBUnit при заполнении таблиц accounts, users не заполняет поле accounts -> user_id. Тест переделан в interaction RelationshipsUserAccountTest
-    }
-
 }

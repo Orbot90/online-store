@@ -2,8 +2,8 @@ package opensource.onlinestore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import opensource.onlinestore.model.dto.UserDTO;
-import opensource.onlinestore.model.entity.ActivityStatus;
-import opensource.onlinestore.model.entity.Role;
+import opensource.onlinestore.model.enums.ActivityStatus;
+import opensource.onlinestore.model.enums.Role;
 import opensource.onlinestore.model.entity.UserEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

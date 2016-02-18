@@ -2,7 +2,7 @@ package opensource.onlinestore.service.interaction;
 
 import opensource.onlinestore.configuration.AppConfigTest;
 import opensource.onlinestore.model.entity.MessageEntity;
-import opensource.onlinestore.model.entity.MessageType;
+import opensource.onlinestore.model.enums.MessageType;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.model.util.UserEntityUtil;
 import opensource.onlinestore.service.MessageService;

@@ -3,7 +3,7 @@ package opensource.onlinestore.service.dbunit;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import opensource.onlinestore.configuration.AppConfigTest;
-import opensource.onlinestore.model.entity.Role;
+import opensource.onlinestore.model.enums.Role;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.service.UserService;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package opensource.onlinestore.model.entity;
+package opensource.onlinestore.model.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 
