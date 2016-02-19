@@ -1,6 +1,6 @@
 package opensource.onlinestore.model.util;
 
-import opensource.onlinestore.model.entity.ActivityStatus;
+import opensource.onlinestore.model.enums.ActivityStatus;
 import opensource.onlinestore.model.entity.UserEntity;
 
 import java.util.Date;

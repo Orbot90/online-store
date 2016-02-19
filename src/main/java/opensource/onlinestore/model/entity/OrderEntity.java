@@ -1,4 +1,7 @@
 package opensource.onlinestore.model.entity;
+import opensource.onlinestore.model.enums.DeliveryType;
+import opensource.onlinestore.model.enums.OrderStatus;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -38,7 +41,7 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "order_status", nullable = false)
     private OrderStatus orderStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 

@@ -1,5 +1,7 @@
 package opensource.onlinestore.model.entity;
 
+import opensource.onlinestore.model.enums.ActivityStatus;
+import opensource.onlinestore.model.enums.Role;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -54,7 +56,7 @@ public class UserEntity extends BaseEntity {
     @JoinColumn(name = "account_id", referencedColumnName = "id", unique = true)
     private AccountEntity account;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     @OrderBy("creationDate DESC")
     private List<MessageEntity> opinions;
 

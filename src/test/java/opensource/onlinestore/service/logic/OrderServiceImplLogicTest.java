@@ -2,9 +2,9 @@ package opensource.onlinestore.service.logic;
 
 
 import opensource.onlinestore.configuration.AppConfigTest;
-import opensource.onlinestore.model.entity.DeliveryType;
+import opensource.onlinestore.model.enums.DeliveryType;
 import opensource.onlinestore.model.entity.OrderEntity;
-import opensource.onlinestore.model.entity.OrderStatus;
+import opensource.onlinestore.model.enums.OrderStatus;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.model.util.UserEntityUtil;
 import opensource.onlinestore.service.OrderService;

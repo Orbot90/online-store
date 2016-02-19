@@ -4,6 +4,9 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import opensource.onlinestore.configuration.AppConfigTest;
 import opensource.onlinestore.model.entity.*;
+import opensource.onlinestore.model.enums.DeliveryType;
+import opensource.onlinestore.model.enums.OrderStatus;
+import opensource.onlinestore.model.util.UserEntityUtil;
 import opensource.onlinestore.service.GoodsService;
 import opensource.onlinestore.service.OrderService;
 import opensource.onlinestore.service.UserService;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
@@ -35,6 +39,7 @@ import static org.junit.Assert.assertEquals;
  *
  * Реализовано:
  *  - создание пустой OrderEntity с User'ом
+ *  - создание OrderEntity с User'ом (незарегистированный пользоваьтель)
  *  - не возможно создать OrderEntity без User'a
  *  - сохранение пустой OrderEntity c оформившим User'ом в БД
  *  - наполнение OrderEntity товарами и сохранение в БД
@@ -92,6 +97,39 @@ public class RelationshipsGoodsUserOrder extends AbstractTransactionalJUnit4Spri
         assertNotNull(actualOrder);
         assertEquals(order, actualOrder);
         assertEquals(user, actualOrder.getUser());
+    }
+
+    @Test
+    @Rollback
+    @DatabaseSetup({"classpath:accounts.xml", "classpath:users.xml", "classpath:categories.xml", "classpath:goods.xml"})
+    public void testCreateOrderNewUser() {
+        /**
+         Этапы теста:
+         - Новый не зарегистрированный UserEntity создает OrderEntity.
+         - Сохранение OrderEntity в БД
+         */
+
+        // given
+        // 1. get User's
+        UserEntity user = UserEntityUtil.createUser();
+        user.setUsername("Неизвестный писатель");
+        user.setEmail("trata@tarta.com");
+
+        // 2. create Order -> empty basket
+        OrderEntity order = new OrderEntity();
+        order.setUser(user);
+        order.setStartDate(new Date());
+        order.setOrderStatus(OrderStatus.BUCKET);
+        order.setDeliveryType(DeliveryType.EXWORKS);
+
+        //when
+        OrderEntity actualOrder = orderService.save(order);
+
+        // then
+        assertNotNull(actualOrder);
+        assertEquals(order, actualOrder);
+        assertEquals(user, actualOrder.getUser());
+        assertTrue(userService.getAll().contains(user));
     }
 
     @Test(expected = DataIntegrityViolationException.class)

@@ -1,7 +1,6 @@
 package opensource.onlinestore.service.logic;
 
 import opensource.onlinestore.configuration.AppConfigTest;
-import opensource.onlinestore.model.entity.ActivityStatus;
 import opensource.onlinestore.model.entity.UserEntity;
 import opensource.onlinestore.service.UserService;
 import opensource.onlinestore.model.util.UserEntityUtil;
@@ -14,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;

@@ -1,5 +1,7 @@
 package opensource.onlinestore.model.entity;
 
+import opensource.onlinestore.model.enums.MessageType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +21,7 @@ public class MessageEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MessageType messageType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
